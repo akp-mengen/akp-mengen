@@ -84,9 +84,9 @@ nav.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.5)}
 .btn-fire:hover{transform:translateY(-2px)}
 .btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(253,248,240,.2);padding:.9rem clamp(1.5rem,4vw,2.4rem);font-family:"Jost",sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:border-color .25s,color .25s;text-decoration:none;display:inline-block}
 .btn-ghost:hover{border-color:var(--gold2);color:var(--gold2)}
-.scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn 1s 1.8s forwards;color:rgba(253,248,240,.3);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
-.scroll-cue .arrow{width:1px;height:40px;background:linear-gradient(to bottom,rgba(201,149,58,.5),transparent);animation:scrollBob 1.8s ease-in-out infinite}
-@keyframes scrollBob{0%,100%{transform:scaleY(1);opacity:.6}50%{transform:scaleY(1.3);opacity:1}}
+.scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fadeIn 1s 1.8s forwards;color:rgba(253,248,240,.35);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.scroll-cue svg{display:block;animation:scrollBob 1.8s ease-in-out infinite}
+@keyframes scrollBob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
 @keyframes fadeIn{to{opacity:1}}
 
 /* RIBBON */
@@ -244,7 +244,7 @@ footer{background:#080705;padding:clamp(2.5rem,5vw,3.5rem) clamp(1rem,4vw,3rem);
       <a class="btn-ghost" href="#kontakt">Kontakt &amp; Anfahrt</a>
     </div>
   </div>
-  <div class="scroll-cue"><span>Entdecken</span><div class="arrow"></div></div>
+  <div class="scroll-cue"><span>Entdecken</span><svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L9 9L17 1" stroke="rgba(201,149,58,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </section>
 
 <!-- RIBBON -->
