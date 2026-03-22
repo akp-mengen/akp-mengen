@@ -491,9 +491,9 @@ footer{background:#080705;padding:clamp(2.5rem,5vw,3.5rem) clamp(1rem,4vw,3rem);
     <div class="rule"></div>
   </div>
   <div class="about-grid">
-    <div class="about-card"><div class="about-icon">🌯</div><h3>Frische Zutaten</h3><p>Wir verwenden täglich frische Zutaten und bereiten unsere Gerichte mit größter Sorgfalt zu, von der knusprigen Steinofenpizza bis zum saftigen Döner.</p></div>
+    <div class="about-card"><div class="about-icon">🥙</div><h3>Frische Zutaten</h3><p>Wir verwenden täglich frische Zutaten und bereiten unsere Gerichte mit größter Sorgfalt zu – von der knusprigen Steinofenpizza bis zum saftigen Döner.</p></div>
     <div class="about-card"><div class="about-icon">🌍</div><h3>Türkische Tradition</h3><p>Unsere Rezepte verbinden authentische türkische Kochkunst mit mediterranen Einflüssen. Jedes Gericht erzählt eine Geschichte von Herkunft und Leidenschaft.</p></div>
-    <div class="about-card"><div class="about-icon">🤝</div><h3>Herzlicher Service</h3><p>Im AKP sind Sie mehr als ein Gast. Möglichst schneller Service, freundliche Atmosphäre und faire Preise, jeden Tag.</p></div>
+    <div class="about-card"><div class="about-icon">🤝</div><h3>Herzlicher Service</h3><p>Im AKP sind Sie mehr als ein Gast – Sie sind ein Teil unserer Familie. Schneller Service, freundliche Atmosphäre und faire Preise, jeden Tag.</p></div>
   </div>
 </section>
 
@@ -515,6 +515,39 @@ footer{background:#080705;padding:clamp(2.5rem,5vw,3.5rem) clamp(1rem,4vw,3rem);
     </div>
   </div>
 </section>
+
+<!-- BESUCHER COUNTER -->
+<section id="besucher" style="background:#0d0d0d;padding:clamp(2.5rem,5vw,3.5rem) clamp(1rem,4vw,3rem);border-top:1px solid rgba(201,149,58,.12)">
+  <div style="max-width:700px;margin:0 auto;text-align:center">
+    <span style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,149,58,.7);font-family:'Jost',sans-serif;">Seitenbesucher</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;color:#fdf8f0;margin:.5rem 0 2rem;letter-spacing:-.01em;">Besucher-Statistik</h2>
+    <div id="counterGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+      <div class="counter-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(253,248,240,.07);border-top:2px solid var(--ember);padding:1.4rem 1rem;">
+        <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,149,58,.7);font-family:'Jost',sans-serif;margin-bottom:.5rem;">Heute</div>
+        <div id="cnt-daily" style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#e0b96a;line-height:1;">–</div>
+      </div>
+      <div class="counter-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(253,248,240,.07);border-top:2px solid var(--ember);padding:1.4rem 1rem;">
+        <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,149,58,.7);font-family:'Jost',sans-serif;margin-bottom:.5rem;">Dieser Monat</div>
+        <div id="cnt-monthly" style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#e0b96a;line-height:1;">–</div>
+      </div>
+      <div class="counter-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(253,248,240,.07);border-top:2px solid var(--ember);padding:1.4rem 1rem;">
+        <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,149,58,.7);font-family:'Jost',sans-serif;margin-bottom:.5rem;">Dieses Jahr</div>
+        <div id="cnt-yearly" style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#e0b96a;line-height:1;">–</div>
+      </div>
+      <div class="counter-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(253,248,240,.07);border-top:2px solid var(--ember);padding:1.4rem 1rem;">
+        <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,149,58,.7);font-family:'Jost',sans-serif;margin-bottom:.5rem;">Gesamt</div>
+        <div id="cnt-total" style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#e0b96a;line-height:1;">–</div>
+      </div>
+    </div>
+    <p style="font-size:.72rem;color:rgba(253,248,240,.25);margin-top:1.2rem;font-family:'Jost',sans-serif;letter-spacing:.04em;">Eindeutige Seitenaufrufe werden gezählt</p>
+  </div>
+</section>
+
+<style>
+@media(max-width:500px){
+  #counterGrid{grid-template-columns:1fr 1fr!important}
+}
+</style>
 
 <!-- FOOTER -->
 <footer>
@@ -560,6 +593,43 @@ document.querySelectorAll(".rev-card,.about-card,.contact-card,.info-item").forE
   el.style.transition="opacity .55s ease,transform .55s ease";
   io.observe(el);
 });
+
+// ── VISITOR COUNTER ──
+(async () => {
+  const fmt = n => n >= 1000 ? (n/1000).toFixed(1)+'k' : String(n);
+  const now = new Date();
+  const dayKey   = 'visits:d:'+now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+  const monthKey = 'visits:m:'+now.getFullYear()+'-'+(now.getMonth()+1);
+  const yearKey  = 'visits:y:'+now.getFullYear();
+  const totalKey = 'visits:total';
+
+  async function inc(key) {
+    try {
+      const r = await window.storage.get(key, true);
+      const n = r ? (parseInt(r.value)||0) + 1 : 1;
+      await window.storage.set(key, String(n), true);
+      return n;
+    } catch(e) {
+      try { await window.storage.set(key, '1', true); return 1; }
+      catch(e2) { return null; }
+    }
+  }
+
+  const [daily, monthly, yearly, total] = await Promise.all([
+    inc(dayKey), inc(monthKey), inc(yearKey), inc(totalKey)
+  ]);
+
+  const ids = ['cnt-daily','cnt-monthly','cnt-yearly','cnt-total'];
+  const vals = [daily, monthly, yearly, total];
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = vals[i] != null ? fmt(vals[i]) : '–';
+    el.style.opacity='0'; el.style.transform='translateY(10px)';
+    el.style.transition='opacity .4s '+(i*0.08)+'s ease,transform .4s '+(i*0.08)+'s ease';
+    requestAnimationFrame(() => setTimeout(()=>{ el.style.opacity='1'; el.style.transform='none'; }, 50));
+  });
+})();
 </script>
 </body>
 </html>
