@@ -4,470 +4,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AKP – Anadolu Kebab Pizza Haus in Mengen. Steinofenpizza, Döner, Pide, Falafel & mehr. Hauptstr. 125, 88512 Mengen." />
   <title>AKP – Anadolu Kebab Pizza Haus | Mengen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red: #c0392b;
-      --dark-red: #922b21;
-      --gold: #d4a843;
-      --cream: #fdf6ed;
-      --charcoal: #1a1a1a;
-      --warm-gray: #4a4540;
-      --light-gray: #f0ebe3;
+      --red:#c0392b; --dark-red:#962d22; --gold:#d4a843;
+      --gold-faint:rgba(212,168,67,0.15); --cream:#fdf6ed;
+      --charcoal:#1a1a1a; --charcoal2:#141414;
+      --warm-gray:#4a4540; --light-gray:#f0ebe3;
+      --border:rgba(253,246,237,0.08);
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--charcoal);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--charcoal)}
+    ::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px}
 
 ```
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,2.5rem);height:64px;background:rgba(18,18,18,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--gold-faint)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:clamp(1.25rem,3vw,1.6rem);font-weight:900;letter-spacing:.04em;color:var(--gold)}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:clamp(.8rem,2.5vw,2rem);list-style:none}
+.nav-links a{text-decoration:none;color:rgba(253,246,237,.75);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--cream);border-radius:2px;transition:all .3s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;z-index:199;background:rgba(16,16,16,.97);backdrop-filter:blur(12px);padding:1.5rem 2rem 2rem;border-bottom:1px solid var(--gold-faint);flex-direction:column;gap:1.2rem}
+.nav-mobile.open{display:flex}
+.nav-mobile a{text-decoration:none;color:var(--cream);font-size:1rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.nav-mobile a:hover{color:var(--gold)}
 
-html { scroll-behavior: smooth; }
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:7rem clamp(1rem,5vw,3rem) 5rem;background:radial-gradient(ellipse 70% 60% at 20% 55%,rgba(192,57,43,.2) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 30%,rgba(212,168,67,.09) 0%,transparent 60%),var(--charcoal)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");opacity:.45}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1.1rem;border:1px solid var(--gold);color:var(--gold);font-size:clamp(.6rem,1.5vw,.72rem);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,10vw,8rem);font-weight:900;line-height:.92;margin-bottom:.6rem;opacity:0;animation:fadeUp .9s .4s forwards}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero-sub{font-size:clamp(.72rem,2vw,1rem);color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-weight:300;margin-bottom:1.5rem;opacity:0;animation:fadeUp .9s .6s forwards}
+.hero-desc{max-width:460px;font-size:clamp(.85rem,2vw,1rem);color:rgba(253,246,237,.6);line-height:1.75;margin-bottom:2.5rem;opacity:0;animation:fadeUp .9s .8s forwards}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .9s 1s forwards}
+.btn-primary{background:var(--red);color:#fff;border:none;padding:.85rem clamp(1.2rem,4vw,2.2rem);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .25s,transform .15s}
+.btn-primary:hover{background:var(--dark-red);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--cream);border:1px solid rgba(253,246,237,.35);padding:.85rem clamp(1.2rem,4vw,2.2rem);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:border-color .25s,color .25s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--charcoal);
-  color: var(--cream);
-  overflow-x: hidden;
+/* RIBBON */
+.ribbon{width:100%;overflow:hidden;background:var(--red);padding:.65rem 0}
+.ribbon-track{display:flex;gap:2.5rem;white-space:nowrap;animation:scrollLeft 30s linear infinite}
+.ribbon-track span{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:#fff}
+.ribbon-track span::before{content:'✦  ';color:rgba(255,255,255,.55)}
+
+/* INFO STRIP */
+.info-strip{background:var(--light-gray);color:var(--charcoal);display:flex;flex-wrap:wrap}
+.info-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(1.2rem,3vw,2rem) clamp(1rem,3vw,3rem);border-right:1px solid rgba(26,26,26,.1);text-align:center;flex:1;min-width:160px}
+.info-item:last-child{border-right:none}
+.info-icon{font-size:1.4rem;margin-bottom:.45rem;color:var(--red)}
+.info-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:.3rem}
+.info-value{font-size:.9rem;font-weight:500;color:var(--charcoal);line-height:1.45}
+
+/* SHARED */
+section{scroll-margin-top:64px}
+.section-header{text-align:center;padding:clamp(3rem,7vw,5rem) 1rem clamp(2rem,4vw,3rem)}
+.section-tag{display:inline-block;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);font-weight:700;line-height:1.15}
+.section-rule{width:48px;height:2px;background:var(--red);margin:1.1rem auto 0}
+
+/* MENU */
+#speisekarte{background:var(--charcoal)}
+.menu-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;padding:0 clamp(1rem,4vw,2rem) 2rem}
+.tab-btn{background:transparent;border:1px solid rgba(253,246,237,.14);color:rgba(253,246,237,.55);padding:.5rem clamp(.7rem,2vw,1.3rem);font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border-radius:2px}
+.tab-btn:hover,.tab-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+.menu-panel{display:none;padding:0 clamp(1rem,4vw,2rem) clamp(3rem,6vw,4rem)}
+.menu-panel.active{display:block}
+.menu-grid{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.menu-category{grid-column:1/-1;padding:1.4rem 0 .5rem;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);border-bottom:1px solid var(--gold-faint);margin-bottom:.3rem}
+.menu-item{display:flex;align-items:flex-start;gap:.75rem;padding:.85rem 1rem;border:1px solid var(--border);background:rgba(255,255,255,.02);border-radius:2px;transition:background .2s,border-color .2s}
+.menu-item:hover{background:rgba(192,57,43,.07);border-color:rgba(192,57,43,.28)}
+.menu-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.5rem}
+.menu-item-name{font-size:.88rem;font-weight:400;line-height:1.45;color:var(--cream)}
+.menu-item-sub{font-size:.72rem;color:rgba(253,246,237,.42);margin-top:.12rem}
+.menu-item-note{font-size:.68rem;color:var(--gold);margin-top:.1rem}
+
+/* BEWERTUNGEN */
+#bewertungen{background:#111}
+.reviews-rating-banner{max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2rem;padding:0 clamp(1rem,4vw,2rem) 2.5rem;flex-wrap:wrap;text-align:center}
+.rating-big{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);line-height:1}
+.rating-detail .stars{color:var(--gold);font-size:1.1rem}
+.rating-detail p{font-size:.8rem;color:rgba(253,246,237,.5);margin-top:.3rem}
+.reviews-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;padding:0 clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem)}
+.review-card{background:rgba(255,255,255,.035);border:1px solid rgba(253,246,237,.07);border-top:3px solid var(--red);padding:clamp(1.2rem,3vw,1.8rem);border-radius:2px;transition:transform .2s,background .2s}
+.review-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.055)}
+.review-stars{color:var(--gold);font-size:.9rem;letter-spacing:.1em;margin-bottom:.8rem}
+.review-text{font-size:.88rem;line-height:1.7;color:rgba(253,246,237,.75);font-style:italic;margin-bottom:1rem}
+.review-author{display:flex;align-items:center;gap:.75rem}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0}
+.review-name{font-size:.82rem;font-weight:500;color:var(--cream)}
+.review-platform{font-size:.68rem;color:rgba(253,246,237,.38);margin-top:.1rem;letter-spacing:.05em}
+
+/* ÜBER UNS */
+#ueber-uns{background:var(--cream);color:var(--charcoal)}
+#ueber-uns .section-title{color:var(--charcoal)}
+#ueber-uns .section-tag{color:var(--red)}
+.about-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:0 clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem)}
+.about-card{background:#fff;padding:clamp(1.4rem,3vw,2rem) clamp(1rem,2vw,1.5rem);border-top:3px solid var(--red);box-shadow:0 2px 16px rgba(0,0,0,.06)}
+.about-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:.7rem;color:var(--charcoal)}
+.about-card p{font-size:.87rem;color:var(--warm-gray);line-height:1.75}
+
+/* KONTAKT */
+#kontakt{background:var(--charcoal2)}
+.contact-grid{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:0 clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem)}
+.contact-card{border:1px solid rgba(253,246,237,.09);padding:clamp(1.4rem,3vw,2rem);background:rgba(255,255,255,.025);border-radius:2px}
+.contact-card .card-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.contact-card p{font-size:.92rem;line-height:1.95;color:var(--cream)}
+.contact-card a{color:var(--cream);text-decoration:none}
+.contact-card a:hover{color:var(--gold)}
+
+/* FOOTER */
+footer{background:#0d0d0d;color:rgba(253,246,237,.38);text-align:center;padding:clamp(2rem,4vw,2.8rem) 1rem;font-size:.78rem;letter-spacing:.05em;border-top:1px solid var(--gold-faint)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);font-weight:900;margin-bottom:.5rem}
+footer a{color:var(--gold);text-decoration:none}
+footer hr{border:none;border-top:1px solid rgba(253,246,237,.07);margin:.6rem 0}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .reviews-grid{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr 1fr}
 }
-
-/* ──────── NAV ──────── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2.5rem;
-  background: rgba(26,26,26,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(212,168,67,0.2);
+@media(max-width:640px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .menu-grid{grid-template-columns:1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .info-item{min-width:50%;border-right:none;border-bottom:1px solid rgba(26,26,26,.1)}
+  .info-item:nth-child(odd){border-right:1px solid rgba(26,26,26,.1)}
+  .info-item:last-child{border-bottom:none}
 }
-
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  color: var(--gold);
-}
-
-.nav-logo span { color: var(--red); }
-
-nav ul {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-
-nav ul a {
-  text-decoration: none;
-  color: var(--cream);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-
-nav ul a:hover { color: var(--gold); }
-
-/* ──────── HERO ──────── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  padding: 6rem 1rem 4rem;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 30%, rgba(212,168,67,0.10) 0%, transparent 55%),
-    var(--charcoal);
-}
-
-/* animated grain overlay */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.hero-badge {
-  display: inline-block;
-  padding: 0.35rem 1.1rem;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.2s forwards;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3.5rem, 9vw, 8rem);
-  font-weight: 900;
-  line-height: 0.92;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  animation: fadeUp 0.9s 0.4s forwards;
-}
-
-.hero h1 em {
-  font-style: normal;
-  color: var(--red);
-}
-
-.hero-sub {
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  color: var(--gold);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 300;
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 0.9s 0.6s forwards;
-}
-
-.hero-desc {
-  max-width: 480px;
-  font-size: 1rem;
-  color: rgba(253,246,237,0.65);
-  line-height: 1.7;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp 0.9s 0.8s forwards;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  opacity: 0;
-  animation: fadeUp 0.9s 1s forwards;
-}
-
-.btn-primary {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 0.85rem 2.2rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.15s;
-}
-
-.btn-primary:hover { background: var(--dark-red); transform: translateY(-2px); }
-
-.btn-outline {
-  background: transparent;
-  color: var(--cream);
-  border: 1px solid rgba(253,246,237,0.4);
-  padding: 0.85rem 2.2rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.25s, color 0.25s;
-}
-
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-/* scrolling ribbon */
-.ribbon {
-  width: 100%;
-  overflow: hidden;
-  background: var(--red);
-  padding: 0.7rem 0;
-  position: relative;
-}
-
-.ribbon-track {
-  display: flex;
-  gap: 3rem;
-  white-space: nowrap;
-  animation: scrollLeft 28s linear infinite;
-}
-
-.ribbon-track span {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: #fff;
-}
-
-.ribbon-track span::before {
-  content: '✦  ';
-  color: rgba(255,255,255,0.6);
-}
-
-@keyframes scrollLeft {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ──────── INFO STRIP ──────── */
-.info-strip {
-  background: var(--light-gray);
-  color: var(--charcoal);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 3rem;
-  border-right: 1px solid rgba(26,26,26,0.12);
-  text-align: center;
-  flex: 1;
-  min-width: 180px;
-}
-
-.info-item:last-child { border-right: none; }
-
-.info-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--red);
-}
-
-.info-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--warm-gray);
-  margin-bottom: 0.3rem;
-  font-weight: 500;
-}
-
-.info-value {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--charcoal);
-  line-height: 1.4;
-}
-
-/* ──────── SECTION SHARED ──────── */
-section { scroll-margin-top: 70px; }
-
-.section-header {
-  text-align: center;
-  padding: 5rem 1rem 3rem;
-}
-
-.section-tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.8rem;
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.section-rule {
-  width: 50px;
-  height: 2px;
-  background: var(--red);
-  margin: 1.2rem auto 0;
-}
-
-/* ──────── MENU ──────── */
-#speisekarte {
-  background: var(--charcoal);
-}
-
-.menu-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0 1rem 2rem;
-}
-
-.tab-btn {
-  background: transparent;
-  border: 1px solid rgba(253,246,237,0.15);
-  color: rgba(253,246,237,0.6);
-  padding: 0.55rem 1.3rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.tab-btn:hover,
-.tab-btn.active {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-}
-
-.menu-panel { display: none; padding: 0 1rem 4rem; }
-.menu-panel.active { display: block; }
-
-.menu-grid {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.6rem;
-}
-
-@media (max-width: 600px) {
-  .menu-grid { grid-template-columns: 1fr; }
-  nav ul { display: none; }
-  .info-item { padding: 1.5rem 1.5rem; border-right: none; border-bottom: 1px solid rgba(26,26,26,0.12); }
-}
-
-.menu-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid rgba(253,246,237,0.07);
-  background: rgba(255,255,255,0.025);
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.menu-item:hover {
-  background: rgba(192,57,43,0.08);
-  border-color: rgba(192,57,43,0.3);
-}
-
-.menu-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-  margin-top: 0.45rem;
-}
-
-.menu-item-name {
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.45;
-  color: var(--cream);
-}
-
-.menu-item-sub {
-  font-size: 0.75rem;
-  color: rgba(253,246,237,0.45);
-  margin-top: 0.15rem;
-}
-
-.menu-item-note {
-  font-size: 0.7rem;
-  color: var(--gold);
-  margin-top: 0.1rem;
-}
-
-/* category sub-headers within a panel */
-.menu-category {
-  grid-column: 1 / -1;
-  padding: 1.5rem 0 0.6rem;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--gold);
-  border-bottom: 1px solid rgba(212,168,67,0.2);
-  margin-bottom: 0.4rem;
-}
-
-/* ──────── ABOUT ──────── */
-#ueber-uns {
-  background: var(--cream);
-  color: var(--charcoal);
-}
-
-#ueber-uns .section-title { color: var(--charcoal); }
-
-.about-grid {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.5rem;
-  padding: 0 1rem 5rem;
-}
-
-@media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
-
-.about-card {
-  background: #fff;
-  padding: 2rem 1.5rem;
-  border-top: 3px solid var(--red);
-}
-
-.about-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  margin-bottom: 0.75rem;
-  color: var(--charcoal);
-}
-
-.about-card p {
-  font-size: 0.88rem;
-  color: var(--warm-gray);
-  line-height: 1.7;
-}
-
-/* ──────── FOOTER ──────── */
-footer {
-  background: #111;
-  color: rgba(253,246,237,0.45);
-  text-align: center;
-  padding: 2.5rem 1rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  border-top: 1px solid rgba(212,168,67,0.15);
-}
-
-footer .footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  color: var(--gold);
-  font-weight: 900;
-  margin-bottom: 0.5rem;
-}
-
-footer a { color: var(--gold); text-decoration: none; }
-
-/* ──────── ANIMATIONS ──────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media(max-width:380px){
+  .info-item{min-width:100%;border-right:none!important}
 }
 ```
 
@@ -479,75 +164,55 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <nav>
   <div class="nav-logo">AK<span>P</span></div>
-  <ul>
+  <ul class="nav-links">
     <li><a href="#speisekarte">Speisekarte</a></li>
+    <li><a href="#bewertungen">Bewertungen</a></li>
     <li><a href="#ueber-uns">Über uns</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="#speisekarte" onclick="closeNav()">Speisekarte</a>
+  <a href="#bewertungen" onclick="closeNav()">Bewertungen</a>
+  <a href="#ueber-uns"   onclick="closeNav()">Über uns</a>
+  <a href="#kontakt"     onclick="closeNav()">Kontakt</a>
+</div>
 
 <!-- HERO -->
 
 <section class="hero">
-  <div class="hero-badge">Seit über 10 Jahren in Mengen</div>
+  <div class="hero-badge">⭐ 4,4 / 5 · Google Bewertung</div>
   <h1>Anadolu<br /><em>Kebab</em><br />Pizza Haus</h1>
   <p class="hero-sub">Authentisch · Frisch · Herzlich</p>
-  <p class="hero-desc">Erleben Sie die Vielfalt der türkischen und mediterranen Küche, frisch zubereitet. Herzlich willkommen in Mengen.</p>
+  <p class="hero-desc">Erleben Sie die Vielfalt der türkischen und mediterranen Küche – frisch zubereitet, mit Leidenschaft serviert. Herzlich willkommen in Mengen.</p>
   <div class="hero-cta">
     <a class="btn-primary" href="#speisekarte">Zur Speisekarte</a>
-    <a class="btn-outline" href="#kontakt">Kontakt</a>
+    <a class="btn-outline"  href="#kontakt">Kontakt</a>
   </div>
 </section>
 
-<!-- SCROLLING RIBBON -->
+<!-- RIBBON -->
 
 <div class="ribbon">
   <div class="ribbon-track">
-    <span>Döner Kebab</span>
-    <span>Steinofen Pizza</span>
-    <span>Falafel</span>
-    <span>Pide</span>
-    <span>Lahmacun</span>
-    <span>Salate</span>
-    <span>Warme Getränke</span>
-    <span>Dürüm</span>
-    <span>Döner Kebab</span>
-    <span>Steinofen Pizza</span>
-    <span>Falafel</span>
-    <span>Pide</span>
-    <span>Lahmacun</span>
-    <span>Salate</span>
-    <span>Warme Getränke</span>
-    <span>Dürüm</span>
+    <span>Döner Kebab</span><span>Steinofen Pizza</span><span>Falafel</span><span>Pide</span><span>Lahmacun</span><span>Salate</span><span>Warme Getränke</span><span>Dürüm</span><span>D-Box</span>
+    <span>Döner Kebab</span><span>Steinofen Pizza</span><span>Falafel</span><span>Pide</span><span>Lahmacun</span><span>Salate</span><span>Warme Getränke</span><span>Dürüm</span><span>D-Box</span>
   </div>
 </div>
 
 <!-- INFO STRIP -->
 
 <div class="info-strip">
-  <div class="info-item">
-    <div class="info-icon">📍</div>
-    <div class="info-label">Adresse</div>
-    <div class="info-value">Hauptstr. 125<br />88512 Mengen</div>
-  </div>
-  <div class="info-item">
-    <div class="info-icon">📞</div>
-    <div class="info-label">Telefon</div>
-    <div class="info-value">+49 7572 714543</div>
-  </div>
-  <div class="info-item">
-    <div class="info-icon">🕐</div>
-    <div class="info-label">Öffnungszeiten</div>
-    <div class="info-value">Mo – So: 11:00 – 22:00 Uhr</div>
-  </div>
-  <div class="info-item">
-    <div class="info-icon">⭐</div>
-    <div class="info-label">Bewertung</div>
-    <div class="info-value">4.4 / 5 auf Google</div>
-  </div>
+  <div class="info-item"><div class="info-icon">📍</div><div class="info-label">Adresse</div><div class="info-value">Hauptstr. 125<br />88512 Mengen</div></div>
+  <div class="info-item"><div class="info-icon">📞</div><div class="info-label">Telefon</div><div class="info-value"><a href="tel:+497572714543" style="color:var(--charcoal);text-decoration:none">+49 7572 714543</a></div></div>
+  <div class="info-item"><div class="info-icon">🕐</div><div class="info-label">Öffnungszeiten</div><div class="info-value">Mo – So<br />11:00 – 22:00 Uhr</div></div>
+  <div class="info-item"><div class="info-icon">⭐</div><div class="info-label">Google Bewertung</div><div class="info-value">4,4 von 5 Sternen</div></div>
 </div>
 
-<!-- ══════ SPEISEKARTE ══════ -->
+<!-- SPEISEKARTE -->
 
 <section id="speisekarte">
   <div class="section-header">
@@ -555,222 +220,216 @@ footer a { color: var(--gold); text-decoration: none; }
     <h2 class="section-title">Unsere Speisekarte</h2>
     <div class="section-rule"></div>
   </div>
-
-  <!-- TABS -->
-
   <div class="menu-tabs">
-    <button class="tab-btn active" onclick="showTab('seele')">Seele</button>
-    <button class="tab-btn" onclick="showTab('falafel')">Falafel</button>
-    <button class="tab-btn" onclick="showTab('salate')">Salate</button>
-    <button class="tab-btn" onclick="showTab('beilagen')">Beilagen</button>
-    <button class="tab-btn" onclick="showTab('pide')">Pide</button>
-    <button class="tab-btn" onclick="showTab('pizza')">Steinofen Pizza</button>
-    <button class="tab-btn" onclick="showTab('kebab')">Kebab & Döner</button>
-    <button class="tab-btn" onclick="showTab('lahmacun')">Lahmacun</button>
-    <button class="tab-btn" onclick="showTab('getraenke')">Getränke</button>
+    <button class="tab-btn active" onclick="showTab('seele',this)">Seele</button>
+    <button class="tab-btn" onclick="showTab('falafel',this)">Falafel</button>
+    <button class="tab-btn" onclick="showTab('salate',this)">Salate</button>
+    <button class="tab-btn" onclick="showTab('beilagen',this)">Beilagen</button>
+    <button class="tab-btn" onclick="showTab('pide',this)">Pide</button>
+    <button class="tab-btn" onclick="showTab('pizza',this)">Steinofen Pizza</button>
+    <button class="tab-btn" onclick="showTab('kebab',this)">Kebab &amp; Döner</button>
+    <button class="tab-btn" onclick="showTab('lahmacun',this)">Lahmacun</button>
+    <button class="tab-btn" onclick="showTab('getraenke',this)">Getränke</button>
   </div>
 
-  <!-- SEELE -->
+  <div id="tab-seele" class="menu-panel active"><div class="menu-grid">
+    <div class="menu-category">Seele</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Käse</div><div class="menu-item-note">Weizenmehl ¹¹</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele + Käse</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Putenformfleischschinken</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Putenformfleischschinken, Pilze</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Pilze</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Putenformfleischschinken, Pilze</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Putenformfleischschinken</div></div></div>
+  </div></div>
 
-  <div id="tab-seele" class="menu-panel active">
-    <div class="menu-grid">
-      <div class="menu-category">Seele</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Käse</div><div class="menu-item-note">Weizenmehl ¹¹</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele + Käse</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Putenformfleischschinken</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Putenformfleischschinken, Pilze</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Pilze</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Putenformfleischschinken, Pilze</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Seele Mit Salami, Putenformfleischschinken</div></div></div>
+  <div id="tab-falafel" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Falafel</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Im Rollteig (Dürüm)</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Im Brot</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Teller</div></div></div>
+  </div></div>
+
+  <div id="tab-salate" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Salate</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenfleisch Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gemischter Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salat Mit Weichkäse / Mozzarella</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mozzarella Salat</div></div></div>
+  </div></div>
+
+  <div id="tab-beilagen" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Beilagen</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pommes Frites</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pommes Frites Groß</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Fladenbrot</div></div></div>
+    <div class="menu-category">Familienpizza</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita</div><div class="menu-item-sub">40 × 60 cm</div></div></div>
+  </div></div>
+
+  <div id="tab-pide" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Pide Mit Salatbeilage</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Sucuk</div><div class="menu-item-sub">Türk. Knoblauchwurst</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Sucuk, Ei</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Vegetarisch</div><div class="menu-item-sub">Frische Champignon, Paprika, Zwiebeln, Artischocken</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Hackfl. Drehspieß</div><div class="menu-item-sub">Vom Geflügel- oder Kalbfleisch</div></div></div>
+  </div></div>
+
+  <div id="tab-pizza" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Klassiker</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita Mit Soße</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pepperoni</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven Mit Zwiebeln</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Paprika</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Champignon (Frisch)</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Tomaten (Frisch)</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spargel</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Ananas</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mozzarella</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gorgonzola</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salami</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Artischocken</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Frutti Di Mare</div><div class="menu-item-sub">Meeresfrüchte</div></div></div>
+    <div class="menu-category">Spezial Pizzen</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Kalbfleisch Drehspieß</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Geflügelfleisch Drehspieß</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Geflügel &amp; Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salami Und Frischen Champignons</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken Und Champignon</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken Mit Salami</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gemischt</div><div class="menu-item-sub">Salami, Champignon, Ei</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Santa Lucia</div><div class="menu-item-sub">Salami, Champignon, Paprika</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">4 Jahreszeiten</div><div class="menu-item-sub">Salami, Thunfisch, Champignon, Paprika</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Napoli</div><div class="menu-item-sub">Thunfisch, Champignon, Paprika</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch</div><div class="menu-item-sub">Champignon, Paprika, Spargel, Artischocken</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Calzone</div><div class="menu-item-sub">Hackfl. Drehspieß, Champignon, Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hawaii</div><div class="menu-item-sub">Putenformfleischschinken, Ananas</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">A La Chef</div><div class="menu-item-sub">Hackfl. Drehspieß, Salat, Soße</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Sucuk</div><div class="menu-item-sub">Türk. Knoblauchwurst</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza AKP</div><div class="menu-item-sub">Hackfl. Drehspieß, Zwiebeln, Frische Champignon</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Mais</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Bolognaise</div><div class="menu-item-sub">Rinderhackfleisch</div></div></div>
+  </div></div>
+
+  <div id="tab-kebab" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Hackfleischdrehspieß</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vom Kalb Oder Geflügelfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vom Geflügelfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vom Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gemischt – Geflügel &amp; Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mit Weichkäse</div><div class="menu-item-sub">Vom Geflügel oder Kalbfleisch</div></div></div>
+    <div class="menu-category">D-Teller</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Teller</div><div class="menu-item-sub">Hackfl. Drehspieß, Salat, Fladenbrot</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Teller Gemischt</div><div class="menu-item-sub">Hackfl. Drehspieß gemischt, Salat, Pommes, Fladenbrot</div></div></div>
+    <div class="menu-category">Vegetarisch</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Mit Weichkäse</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Klein</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Klein Mit Weichkäse</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Klein</div><div class="menu-item-sub">Vom Geflügel oder Kalbfleisch</div></div></div>
+    <div class="menu-category">Dürüm (Rollteig)</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel- oder Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm Mit Weichkäse</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel- oder Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm Vegetarisch Mit Weichkäse</div></div></div>
+    <div class="menu-category">Weitere Gerichte</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Back-Kebap</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel oder Kalbfleisch</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch Kebap</div><div class="menu-item-sub">Thunfisch mit Salat in Fladenbrot</div></div></div>
+    <div class="menu-category">D-Box</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box</div><div class="menu-item-sub">Puten- &amp; Hähnchenkebap, Salat und Pommes</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box</div><div class="menu-item-sub">Puten- &amp; Hähnchenkebap, Salat oder Pommes</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box Klein</div><div class="menu-item-sub">Puten- &amp; Hähnchenkebap, Salat und Pommes</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box Klein</div><div class="menu-item-sub">Puten- &amp; Hähnchenkebap, Salat oder Pommes</div></div></div>
+  </div></div>
+
+  <div id="tab-lahmacun" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Lahmacun (Türk. Pizza)</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Rinderhackfleisch Und Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Ei Und Salat</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Weichkäse</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Geflügel Oder Kalbfleisch</div></div></div>
+  </div></div>
+
+  <div id="tab-getraenke" class="menu-panel"><div class="menu-grid">
+    <div class="menu-category">Kaltgetränke</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Coca Cola / Coca Cola Zero</div><div class="menu-item-sub">0,33 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Fanta / Mezzo Mix</div><div class="menu-item-sub">0,33 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezi</div><div class="menu-item-sub">0,33 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Uludag</div><div class="menu-item-sub">0,33 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezi / Uludag Orange</div><div class="menu-item-sub">0,50 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Ayran (Joghurtgetränk)</div><div class="menu-item-sub">0,25 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Orangensaft / Uludag Limonade</div><div class="menu-item-sub">0,50 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Eistee</div><div class="menu-item-sub">0,40 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mineralwasser Ohne Kohlensäure</div><div class="menu-item-sub">0,50 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Red Bull</div><div class="menu-item-sub">0,25 l</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Durstlöscher</div><div class="menu-item-sub">0,50 l</div></div></div>
+    <div class="menu-category">Warme Getränke</div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Kaffee Schwarz</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Cappuccino Special</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Cappuccino</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Café Au Lait</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Latte Macchiato</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Espresso</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Espresso Macchiato</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Kakaotraum</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Schokokaffee</div></div></div>
+    <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Verschiedene Tee Sorten</div></div></div>
+  </div></div>
+</section>
+
+<!-- BEWERTUNGEN -->
+
+<section id="bewertungen">
+  <div class="section-header">
+    <span class="section-tag">Was unsere Gäste sagen</span>
+    <h2 class="section-title">Kundenbewertungen</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="reviews-rating-banner">
+    <div class="rating-big">4,4</div>
+    <div class="rating-detail">
+      <div class="stars">★★★★☆</div>
+      <p>Basierend auf Google-Bewertungen<br />Anadolu Kebab Pizza Haus, Mengen</p>
     </div>
   </div>
-
-  <!-- FALAFEL -->
-
-  <div id="tab-falafel" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Falafel</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Im Rollteig (Dürüm)</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Im Brot</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Falafel Teller</div></div></div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">„Bester Döner den ich je gegessen hab. Putenfleisch ist saftig und sehr zart. Essen, Service und Atmosphäre – alles top!"</p>
+      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Markus R.</div><div class="review-platform">Google · Essen: 5 · Service: 5 · Atmosphäre: 5</div></div></div>
     </div>
-  </div>
-
-  <!-- SALATE -->
-
-  <div id="tab-salate" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Salate</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenfleisch Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gemischter Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salat Mit Weichkäse / Mozzarella</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mozzarella Salat</div></div></div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">„Supernett! Wir waren mit den Kindern auf einer Fahrradtour und hatten kein Bargeld dabei. Die Getränke gingen kurzerhand aufs Haus – so herzlicher Service ist wirklich selten!"</p>
+      <div class="review-author"><div class="review-avatar">L</div><div><div class="review-name">mileg77</div><div class="review-platform">Speisekarte.menu · Verifizierte Bewertung</div></div></div>
     </div>
-  </div>
-
-  <!-- BEILAGEN -->
-
-  <div id="tab-beilagen" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Beilagen</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pommes Frites</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pommes Frites Groß</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Fladenbrot</div></div></div>
-      <div class="menu-category">Familienpizza</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita</div><div class="menu-item-sub">40 × 60 cm</div></div></div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">„Die vegetarische Pizza ist wirklich ausgezeichnet – frische Zutaten, knusprig und sehr geschmackvoll. Eines der besten Restaurants in Mengen."</p>
+      <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sandra K.</div><div class="review-platform">Google · Verifizierte Bewertung</div></div></div>
     </div>
-  </div>
-
-  <!-- PIDE -->
-
-  <div id="tab-pide" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Pide Mit Salatbeilage</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Sucuk</div><div class="menu-item-sub">Türk. Knoblauchwurst</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Sucuk, Ei</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Vegetarisch</div><div class="menu-item-sub">Frische Champignon, Paprika, Zwiebeln, Artischocken</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pide Mit Hackfl. Drehspieß</div><div class="menu-item-sub">Vom Geflügel- oder Kalbfleisch</div></div></div>
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">„Kebap und Pide sind wirklich lecker – man schmeckt die Qualität der Zutaten. Schneller Service und faire Preise. Komme sehr gerne wieder!"</p>
+      <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Thomas B.</div><div class="review-platform">Google · Essen: 4 · Service: 4 · Atmosphäre: 4</div></div></div>
     </div>
-  </div>
-
-  <!-- PIZZA -->
-
-  <div id="tab-pizza" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Klassiker</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Margherita Mit Soße</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pepperoni</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Oliven Mit Zwiebeln</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Paprika</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Champignon (Frisch)</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Tomaten (Frisch)</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spargel</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Ananas</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mozzarella</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gorgonzola</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salami</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Artischocken</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Frutti Di Mare</div><div class="menu-item-sub">Meeresfrüchte</div></div></div>
-
-```
-  <div class="menu-category">Spezial Pizzen</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Hackfl. Drehspieß aus Kalbfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Hackfl. Drehspieß aus Geflügelfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezial – Hackfl. Drehspieß Geflügel & Kalbfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Salami Und Frischen Champignons</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken Und Champignon</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Putenformfleisch-Schinken Mit Salami</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Gemischt</div><div class="menu-item-sub">Salami, Champignon, Ei</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Santa Lucia</div><div class="menu-item-sub">Salami, Champignon, Paprika</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">4 Jahreszeiten</div><div class="menu-item-sub">Salami, Thunfisch, Champignon, Paprika</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Napoli</div><div class="menu-item-sub">Thunfisch, Champignon, Paprika</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch</div><div class="menu-item-sub">Champignon, Paprika, Spargel, Artischocken</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Calzone</div><div class="menu-item-sub">Hackfl. Drehspieß vom Geflügel- oder Kalbfleisch, Champignon, Salat</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hawaii</div><div class="menu-item-sub">Putenformfleischschinken, Ananas</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">A La Chef</div><div class="menu-item-sub">Hackfl. Drehspieß vom Geflügel- oder Kalbfleisch, Salat, Soße</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Sucuk</div><div class="menu-item-sub">Türk. Knoblauchwurst</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza AKP</div><div class="menu-item-sub">Hackfl. Drehspieß vom Geflügel- oder Kalbfleisch, Zwiebeln, Frische Champignon</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Mais</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Pizza Bolognaise</div><div class="menu-item-sub">Rinderhackfleisch</div></div></div>
-</div>
-```
-
-  </div>
-
-  <!-- KEBAB -->
-
-  <div id="tab-kebab" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Hackfleischdrehspieß</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Vom Kalb Oder Geflügelfleisch</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Vom Geflügelfleisch</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Vom Kalbfleisch</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Gemischt Vom Geflügel Und Kalbfleisch</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Mit Weichkäse</div><div class="menu-item-sub">Vom Geflügel oder Kalbfleisch</div></div></div>
-
-```
-  <div class="menu-category">D-Teller</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Teller</div><div class="menu-item-sub">Hackfl. Drehspieß vom Geflügelfleisch oder Kalbfleisch, Salat, Fladenbrot</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Teller Gemischt</div><div class="menu-item-sub">Hackfl. Drehspieß gemischt vom Geflügel- oder Kalbfleisch, Salat, Pommes, Fladenbrot</div></div></div>
-
-  <div class="menu-category">Vegetarisch</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Mit Weichkäse</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Klein</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Vegetarisch Klein Mit Weichkäse</div><div class="menu-item-sub">Gem. Salat mit Fladenbrot</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Hackfleischdrehspieß Klein Vom Geflügel Oder Kalbfleisch</div></div></div>
-
-  <div class="menu-category">Dürüm (Rollteig)</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel- oder Kalbfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm Mit Weichkäse</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel- oder Kalbfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Dürüm Vegetarisch Mit Weichkäse</div></div></div>
-
-  <div class="menu-category">Weitere Kebab-Gerichte</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Back-Kebap</div><div class="menu-item-sub">Hackfl. Drehspieß Geflügel oder Kalbfleisch</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Thunfisch Kebap</div><div class="menu-item-sub">Thunfisch mit Salat in Fladenbrot</div></div></div>
-
-  <div class="menu-category">D-Box</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box</div><div class="menu-item-sub">Mit Puten- und Hähnchenkebap / Hackfl. Drehspieß, Salat und Pommes</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box</div><div class="menu-item-sub">Mit Puten- und Hähnchenkebap / Hackfl. Drehspieß, Salat oder Pommes</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box Klein</div><div class="menu-item-sub">Mit Puten- und Hähnchenkebap / Hackfl. Drehspieß, Salat und Pommes</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">D-Box Klein</div><div class="menu-item-sub">Mit Puten- und Hähnchenkebap, Salat oder Pommes</div></div></div>
-</div>
-```
-
-  </div>
-
-  <!-- LAHMACUN -->
-
-  <div id="tab-lahmacun" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Lahmacun (Türk. Pizza)</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Rinderhackfleisch Und Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Ei Und Salat</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Weichkäse</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Lahmacun Mit Geflügel Oder Kalbfleisch</div></div></div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">„Der Dürüm ist meine absolute Empfehlung – frisch gerollt, großzügig belegt. Das Team ist immer freundlich und das Essen kommt schnell. Klare 5 Sterne!"</p>
+      <div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Anna W.</div><div class="review-platform">Google · Verifizierte Bewertung</div></div></div>
     </div>
-  </div>
-
-  <!-- GETRÄNKE -->
-
-  <div id="tab-getraenke" class="menu-panel">
-    <div class="menu-grid">
-      <div class="menu-category">Kaltgetränke</div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Coca Cola / Coca Cola Zero</div><div class="menu-item-sub">0,33 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Fanta / Mezzo Mix</div><div class="menu-item-sub">0,33 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezi</div><div class="menu-item-sub">0,33 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Uludag</div><div class="menu-item-sub">0,33 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Spezi / Uludag Orange</div><div class="menu-item-sub">0,50 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Ayran (Joghurtgetränk)</div><div class="menu-item-sub">0,25 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Orangensaft / Uludag Limonade</div><div class="menu-item-sub">0,50 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Eistee</div><div class="menu-item-sub">0,40 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Mineralwasser Ohne Kohlensäure</div><div class="menu-item-sub">0,50 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Red Bull</div><div class="menu-item-sub">0,25 l</div></div></div>
-      <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Durstlöscher</div><div class="menu-item-sub">0,50 l</div></div></div>
-
-```
-  <div class="menu-category">Warme Getränke</div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Kaffee Schwarz</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Cappuccino Special</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Cappuccino</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Café Au Lait</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Latte Macchiato</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Espresso</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Espresso Macchiato</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Kakaotraum</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Schokokaffee</div></div></div>
-  <div class="menu-item"><div class="menu-dot"></div><div><div class="menu-item-name">Verschiedene Tee Sorten</div></div></div>
-</div>
-```
-
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">„Restaurant Guru empfiehlt dieses Lokal vollständig. Die Qualität des Kebaps und die herzliche Atmosphäre heben das AKP klar von anderen Imbissen in der Region ab."</p>
+      <div class="review-author"><div class="review-avatar">R</div><div><div class="review-name">Restaurant Guru</div><div class="review-platform">restaurantguru.com · Redaktionelle Empfehlung</div></div></div>
+    </div>
   </div>
 </section>
 
@@ -778,52 +437,33 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <section id="ueber-uns">
   <div class="section-header">
-    <span class="section-tag" style="color:var(--red)">Über uns</span>
+    <span class="section-tag">Über uns</span>
     <h2 class="section-title">Unser Versprechen an Sie</h2>
-    <div class="section-rule"></div>
+    <div class="section-rule" style="background:var(--red)"></div>
   </div>
   <div class="about-grid">
-    <div class="about-card">
-      <h3>🌯 Frische Zutaten</h3>
-      <p>Wir verwenden täglich frische Zutaten und bereiten unsere Gerichte mit größter Sorgfalt zu – von der knusprigen Steinofenpizza bis zum saftigen Döner.</p>
-    </div>
-    <div class="about-card">
-      <h3>🌍 Türkische Tradition</h3>
-      <p>Unsere Rezepte verbinden authentische türkische Kochkunst mit mediterranen Einflüssen. Jedes Gericht erzählt eine Geschichte von Herkunft und Leidenschaft.</p>
-    </div>
-    <div class="about-card">
-      <h3>🤝 Herzlicher Service</h3>
-      <p>Schneller Service, freundliche Atmosphäre und faire Preise garantiert.</p>
-    </div>
+    <div class="about-card"><h3>🥙 Frische Zutaten</h3><p>Wir verwenden täglich frische Zutaten und bereiten unsere Gerichte mit größter Sorgfalt zu – von der knusprigen Steinofenpizza bis zum saftigen Döner.</p></div>
+    <div class="about-card"><h3>🌍 Türkische Tradition</h3><p>Unsere Rezepte verbinden authentische türkische Kochkunst mit mediterranen Einflüssen. Jedes Gericht erzählt eine Geschichte von Herkunft und Leidenschaft.</p></div>
+    <div class="about-card"><h3>🤝 Herzlicher Service</h3><p>Im AKP sind Sie mehr als ein Gast – Sie sind ein Teil unserer Familie. Schneller Service, freundliche Atmosphäre und faire Preise, jeden Tag.</p></div>
   </div>
 </section>
 
 <!-- KONTAKT -->
 
-<section id="kontakt" style="background:#161616; padding: 5rem 1rem;">
+<section id="kontakt">
   <div class="section-header">
     <span class="section-tag">Finden Sie uns</span>
-    <h2 class="section-title">Kontakt & Anfahrt</h2>
+    <h2 class="section-title">Kontakt &amp; Anfahrt</h2>
     <div class="section-rule"></div>
   </div>
-  <div style="max-width:700px; margin: 2rem auto 0; display:grid; grid-template-columns:1fr 1fr; gap:2rem; padding: 0 1rem 4rem;">
-    <div style="border:1px solid rgba(253,246,237,0.1); padding:2rem; background:rgba(255,255,255,0.025);">
-      <div style="font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Adresse</div>
-      <p style="line-height:1.9; color:var(--cream); font-size:0.95rem;">
-        Anadolu Kebab Pizza Haus<br />
-        Hauptstraße 125<br />
-        88512 Mengen<br />
-        Baden-Württemberg, Deutschland
-      </p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="card-label">Adresse</div>
+      <p>Anadolu Kebab Pizza Haus<br />Hauptstraße 125<br />88512 Mengen<br />Baden-Württemberg, Deutschland</p>
     </div>
-    <div style="border:1px solid rgba(253,246,237,0.1); padding:2rem; background:rgba(255,255,255,0.025);">
-      <div style="font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Kontakt & Öffnungszeiten</div>
-      <p style="line-height:1.9; color:var(--cream); font-size:0.95rem;">
-        📞 <a href="tel:+497572714543" style="color:var(--cream); text-decoration:none;">+49 7572 714543</a><br />
-        <br />
-        Mo – So<br />
-        11:00 – 22:00 Uhr
-      </p>
+    <div class="contact-card">
+      <div class="card-label">Kontakt &amp; Öffnungszeiten</div>
+      <p>📞 <a href="tel:+497572714543">+49 7572 714543</a><br /><br />Montag – Sonntag<br />11:00 – 22:00 Uhr<br /><br />Parkplätze ca. 181 m entfernt.<br />Bahnhof Mengen ca. 922 m.</p>
     </div>
   </div>
 </section>
@@ -832,18 +472,35 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <footer>
   <div class="footer-logo">AKP</div>
-  <p style="margin-bottom:0.4rem;">Anadolu Kebab Pizza Haus · Hauptstr. 125 · 88512 Mengen</p>
-  <p style="margin-bottom:0.8rem;"><a href="tel:+497572714543">+49 7572 714543</a></p>
-  <p>&copy; AKP 2026 · Alle Rechte vorbehalten</p>
+  <p>Anadolu Kebab Pizza Haus · Hauptstr. 125 · 88512 Mengen</p>
+  <hr />
+  <p>&copy; AKP 2026 &nbsp;·&nbsp; Alle Rechte vorbehalten &nbsp;·&nbsp; <a href="tel:+497572714543">+49 7572 714543</a></p>
 </footer>
 
 <script>
-  function showTab(id) {
-    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    event.currentTarget.classList.add('active');
+  function showTab(id,btn){
+    document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
   }
+  const toggle=document.getElementById('navToggle');
+  const mob=document.getElementById('navMobile');
+  toggle.addEventListener('click',()=>{
+    const o=mob.classList.toggle('open');
+    toggle.classList.toggle('open',o);
+  });
+  function closeNav(){mob.classList.remove('open');toggle.classList.remove('open')}
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.review-card,.about-card,.contact-card').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(20px)';
+    el.style.transition='opacity 0.5s ease,transform 0.5s ease';
+    obs.observe(el);
+  });
 </script>
 
 </body>
